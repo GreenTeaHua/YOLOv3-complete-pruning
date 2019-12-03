@@ -69,7 +69,7 @@
 
 ## 模型训练
 
-1.正常训练
+1.正常训练（可以不进行）
 
 ```bash
 python3 train.py --data data/oxfordhand.data --batch-size 32 --accumulate 1 --weights weights/yolov3.weights --cfg cfg/yolov3-hand.cfg
@@ -114,6 +114,16 @@ python prune_tiny_yolo.py
 ```
 需要注意的是，这里需要在.py文件内，将opt内的cfg和weights变量指向第2步稀疏化后生成的cfg文件和weights文件。
 此外，可通过增大代码中percent的值来获得更大的压缩率。（若稀疏化不到位，且percent值过大，程序会报错。）
+只训练100 Epoch：  
++------------+----------+----------+  
+| Metric     | Before   | After    |  
++------------+----------+----------+  
+| mAP        | 0.615488 | 0.302450 |  
+| Parameters | 8669876  | 5602356  |  
+| Inference  | 0.0092   | 0.0091   |  
++------------+----------+----------+  
+Config file has been saved: cfg/prune_0.3_yolov3-tiny-hand.cfg   
+Compact model has been saved: weights/yolov3_tiny_hand_pruning_0.3percent.weights  
 
 ## 推理展示
 
