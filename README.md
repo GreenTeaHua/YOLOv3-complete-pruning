@@ -88,7 +88,8 @@ python3 train.py --data data/oxfordhand.data --batch-size 32 --accumulate 1 --we
 `--prune 2`为Tiny剪枝的稀疏化
 
 ```bash
-python3 train.py --data data/oxfordhand.data --batch-size 32 --accumulate 1 --weights weights/yolov3.weights --cfg cfg/yolov3-hand.cfg -sr --s 0.001 --prune 0 
+python3 train.py --data data/oxfordhand.data --batch-size 32 --accumulate 1 --weights weights/yolov3.weights --cfg cfg/yolov3-hand.cfg -sr --s 0.001 --prune 0   
+python train.py --data data/oxfordhand.data --batch-size 32 --accumulate 1 --weights D:/yolo/data/yolov3-tiny.weights --cfg cfg/yolov3-tiny-hand.cfg -sr --s 0.001 --prune 0   
 ```
 
 3.模型剪枝
@@ -107,7 +108,9 @@ python3 shortcut_prune.py
 ```
 - Tiny剪枝
 ```bash
-python3 prune_tiny_yolo.py
+python3 prune_tiny_yolo.py  
+win10 将test.py中Dateloder模块的num_works从一开始min([os.cpu_count(), batch_size, 16]，改成0
+python prune_tiny_yolo.py  
 ```
 需要注意的是，这里需要在.py文件内，将opt内的cfg和weights变量指向第2步稀疏化后生成的cfg文件和weights文件。
 此外，可通过增大代码中percent的值来获得更大的压缩率。（若稀疏化不到位，且percent值过大，程序会报错。）
